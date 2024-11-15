@@ -279,6 +279,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 .welcome-hero-serch-box{margin-top: 78px;display: flex;}
 .welcome-hero-form {
     display: flex;
+    margin-left: 70px;
     background: #fff;
     height: 70px;
     border-radius: 3px;
@@ -292,16 +293,18 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     width: 50%;
     padding: 0 30px;
 }
-.single-welcome-hero-form:first-child{border-right: 1px solid #edeff1;}
+
 .single-welcome-hero-form input {
-    margin-left: 10px;
+    margin-left: 50px;
     height: 70px;
     width: 300px;
+    gap:10px;
     border: 0;
     background: transparent;
 }
 .single-welcome-hero-form input[type="text"]{
     font-size: 14px;
+    padding : 8px;
     color: #859098;
     text-transform: capitalize;
     font-weight: 500;
@@ -342,7 +345,9 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
         5. List-topuics
 --------------------------------------*/
 .list-topics-content {
-    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
     top: -98px;
     z-index: 1;
 }
