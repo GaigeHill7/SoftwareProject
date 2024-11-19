@@ -341,6 +341,224 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     margin-left:  12px;
 }
 
+.AdminLogin {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.AdminLogin h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.AdminLogin .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.AdminLogin label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.AdminLogin input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.AdminLogin button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.AdminLogin button:hover {
+    background: #0056b3;
+}
+
+#error-message {
+    margin-top: 10px;
+}
+/*user-login-section
+UserLogin
+/* User Login Specific Styles */
+.UserLogin {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.UserLogin h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.UserLogin .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.UserLogin label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.UserLogin input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.UserLogin button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.UserLogin button:hover {
+    background: #0056b3;
+}
+
+/* User Sign UP Specific Styles */
+.SignUp {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.SignUp h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.SignUp .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.SignUp label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.SignUp input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.SignUp button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.SignUp button:hover {
+    background: #0056b3;
+}
+
+/*Buy CSS*/
+/* User Sign UP Specific Styles */
+.BuyPage {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.BuyPage h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.BuyPage .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.SignUp label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.BuyPage input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.BuyPage button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.BuyPage button:hover {
+    background: #0056b3;
+}
+
+#error-message {
+    margin-top: 10px;
+}
+
+
 /*-------------------------------------
         5. List-topuics
 --------------------------------------*/
