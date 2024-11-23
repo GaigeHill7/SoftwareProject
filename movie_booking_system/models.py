@@ -19,7 +19,11 @@ class Movie(db.Model):
     synopsis = db.Column(db.Text, nullable=True)
     cast = db.Column(db.Text, nullable=True)
     runtime = db.Column(db.Integer, nullable=True)
+    status = db.Column(db.String(20), nullable=False)  # "Now Showing" or "Upcoming"
+    price = db.Column(db.Float, nullable=True)  # Optional: Add if you need prices
+    release_date = db.Column(db.Date, nullable=True)  # Optional: Add for dates
     reviews = db.relationship('Review', backref='movie', lazy=True)
+
 
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)

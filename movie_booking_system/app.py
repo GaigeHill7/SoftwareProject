@@ -1,6 +1,16 @@
+from flask_migrate import Migrate
 from flask import Flask, render_template, redirect, url_for, request, flash, session
-from models import db, User, Movie, Ticket, Admin  # Update based on your models
+from models import db, User, Movie, Ticket, Admin  # Ensure these models exist and are properly defined
 from datetime import datetime
+
+
+
+
+# with app.app_context():
+#     db.create_all()
+
+
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_booking.db'
@@ -8,6 +18,10 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 
 db.init_app(app)
 
+
+migrate = Migrate(app, db)
+
+# Default Route - Redirects to Login
 @app.route('/')
 def default():
     return redirect(url_for('login'))
@@ -15,8 +29,10 @@ def default():
 # Home Route
 @app.route('/home')
 def home():
-    return render_template('home.html')  # Home page with navigation
-
+    if 'user_id' not in session:
+        flash('Please log in to access the home page.', 'warning')
+        return redirect(url_for('login'))
+    return render_template('home.html')  # Home page for logged-in users
 
 # User Registration Route
 @app.route('/register', methods=['GET', 'POST'])
@@ -53,7 +69,7 @@ def login():
         if user:
             session['user_id'] = user.id
             flash('Login successful!', 'success')
-            return redirect(url_for('home'))
+            return redirect(url_for('browse_movies'))
         else:
             flash('Invalid username or password. Please try again.', 'danger')
 
@@ -69,13 +85,10 @@ def logout():
 # Browse Movies Route
 @app.route('/browse_movies')
 def browse_movies():
-    if 'user_id' not in session:
-        flash('Please log in to continue.', 'warning')
-        return redirect(url_for('login'))
-
-    now_showing = Movie.query.filter_by(status='Now Showing').all()
-    upcoming_movies = Movie.query.filter_by(status='Upcoming').all()
+    now_showing = Movie.query.filter_by(status="Now Showing").all()
+    upcoming_movies = Movie.query.filter_by(status="Upcoming").all()
     return render_template('browse_movies.html', now_showing=now_showing, upcoming_movies=upcoming_movies)
+
 
 # Purchase Ticket Route
 @app.route('/purchase_ticket/<int:movie_id>', methods=['GET', 'POST'])
