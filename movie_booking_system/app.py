@@ -14,7 +14,7 @@ def default():
     return redirect(url_for('login'))
 
 # Home Route
-@app.route('/')
+@app.route('/home')
 def home():
     return render_template('home.html')  # Home page with navigation
 
