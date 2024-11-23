@@ -1,0 +1,166 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Family -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Title -->
+    <title>Browse Movies - Raider Tickets</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/icon" href="{{ url_for('static', filename='images/favicon.png') }}"/>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header-top" class="header-top">
+        <ul>
+            <li>
+                <div class="header-top-left">
+                    <ul>
+                        <li class="select-opt">
+                            <select name="language" id="language">
+                                <option value="default">EN</option>
+                                <option value="Bangla">BN</option>
+                                <option value="Arabic">AB</option>
+                            </select>
+                        </li>
+                        <li class="select-opt">
+                            <select name="currency" id="currency">
+                                <option value="usd">USD</option>
+                                <option value="euro">Euro</option>
+                                <option value="bdt">BDT</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('home') }}">Raider<span>Tickets</span></a>
+            </div>
+            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="scroll active"><a href="#home">Home</a></li>
+                    <li class="scroll"><a href="#NowShowing">Now Showing</a></li>
+                    <li class="scroll"><a href="#UpcomingShowing">Upcoming Movies</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Section -->
+    <section id="home" class="welcome-hero">
+        <div class="container">
+            <div class="welcome-hero-txt">
+                <h2>RAIDER TICKETS <br> EVERYTHING AND ALL YOU NEED</h2>
+                <p>Search for now showing movies as well as upcoming movies now!!!</p>
+            </div>
+            <div class="welcome-hero-serch-box">
+                <div class="welcome-hero-form">
+                    <form action="{{ url_for('search_movies') }}" method="GET">
+                        <div class="single-welcome-hero-form">
+                            <h3>What Movie?</h3>
+                            <input type="text" name="query" placeholder="Ex: Nemo, Forrest Gump, The Incredibles" required>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Now Showing Movies -->
+    <section id="NowShowing" class="explore">
+        <div class="container">
+            <div class="section-header">
+                <h2>Now Showing Movies</h2>
+            </div>
+            <div class="explore-content">
+                <div class="row">
+                    {% for movie in now_showing %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-explore-item">
+                            <div class="single-explore-img">
+                                <img src="{{ url_for('static', filename='images/explore/' + movie.image) }}" alt="{{ movie.title }} image">
+                            </div>
+                            <div class="single-explore-txt bg-theme-1">
+                                <h2><a href="{{ url_for('movie_details', movie_id=movie.id) }}">{{ movie.title }}</a></h2>
+                                <p class="explore-rating-price">
+                                    <span class="explore-rating">{{ movie.rating }}</span>
+                                    <span> {{ movie.ratings_count }} ratings</span>
+                                    <span class="explore-price-box">
+                                        From
+                                        <span class="explore-price">${{ movie.price }}</span>
+                                    </span>
+                                    <a href="{{ url_for('buy_ticket', movie_id=movie.id) }}" class="btn btn-primary">Buy</a>
+                                </p>
+                                <p>{{ movie.description[:150] }}...</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Movies -->
+    <section id="UpcomingShowing" class="explore">
+        <div class="container">
+            <div class="section-header">
+                <h2>Upcoming Movies</h2>
+            </div>
+            <div class="explore-content">
+                <div class="row">
+                    {% for movie in upcoming %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-explore-item">
+                            <div class="single-explore-img">
+                                <img src="{{ url_for('static', filename='images/explore/' + movie.image) }}" alt="{{ movie.title }} image">
+                            </div>
+                            <div class="single-explore-txt bg-theme-1">
+                                <h2><a href="{{ url_for('movie_details', movie_id=movie.id) }}">{{ movie.title }}</a></h2>
+                                <p>{{ movie.description[:150] }}...</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="hm-footer-copyright">
+            <p>&copy; 2024 Raider Tickets. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+</body>
+
+</html>

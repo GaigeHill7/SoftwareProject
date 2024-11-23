@@ -8,6 +8,11 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 db.init_app(app)
 
 
+
+@app.route('/')
+def default():
+    return redirect(url_for('login'))
+
 # Home Route
 @app.route('/')
 def home():
@@ -57,13 +62,21 @@ def login():
     
     return render_template('login.html')
 
+# Log out
+@app.route('/logout')
+def logout():
+    session.clear()  # Clear all session data
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('login'))
 
 
 # Browse Movies
 @app.route('/browse_movies')
 def browse_movies():
-    movies = Movie.query.all()
-    return render_template('movies.html', movies=movies)
+    now_showing = Movie.query.filter_by(status="now_showing").all()
+    upcoming = Movie.query.filter_by(status="upcoming").all()
+    return render_template('browse_movies.html', now_showing=now_showing, upcoming=upcoming)
+
 
 
 # Movie Details
@@ -98,6 +111,22 @@ def purchase_ticket(movie_id):
         return redirect(url_for('home'))
     
     return render_template('purchase_ticket.html', movie=movie)
+
+
+@app.route('/confirm_purchase', methods=['POST'])
+def confirm_purchase():
+    movie_name = request.form['movie_name']
+    ticket_num = request.form['ticket_num']
+    email = request.form['email']
+    card_number = request.form['card_number']
+    cvv = request.form['cvv']
+    expiration_date = request.form['expiration_date']
+
+    # Add logic to process the purchase here
+
+    flash('Purchase confirmed!', 'success')
+    return redirect(url_for('browse_movies'))
+
 
 
 # Admin Dashboard
