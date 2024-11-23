@@ -1,13 +1,13 @@
+from app import app  # Import the app object from app.py
+from models import db, Movie
 from datetime import datetime
-from app import app, db
-from models import Movie
 
-# Push the application context
+# Ensure the app context is available for database operations
 with app.app_context():
-    # Seed the database
+    # Seed data
     movie1 = Movie(
         title="Deadpool 3",
-        synopsis="...",
+        synopsis="Deadpool's peaceful existence comes crashing down...",
         cast="Ryan Reynolds",
         runtime=120,
         status="Now Showing",
@@ -16,7 +16,7 @@ with app.app_context():
     )
     movie2 = Movie(
         title="Red One",
-        synopsis="...",
+        synopsis="A thrilling holiday adventure...",
         cast="Dwayne Johnson",
         runtime=140,
         status="Upcoming",
@@ -24,7 +24,7 @@ with app.app_context():
         release_date=datetime(2024, 12, 25)
     )
 
+    # Add and commit movies to the database
     db.session.add_all([movie1, movie2])
     db.session.commit()
-
-    print("Movies added successfully!")
+    print("Seed data successfully added!")

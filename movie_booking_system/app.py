@@ -115,9 +115,11 @@ def purchase_ticket(movie_id):
 # Search Movies Route
 @app.route('/search_movies', methods=['GET'])
 def search_movies():
-    query = request.args.get('query', '')
+    query = request.args.get('query', '').strip()
     results = Movie.query.filter(Movie.title.ilike(f"%{query}%")).all()
-    return render_template('search_results.html', results=results, query=query)
+    return render_template('search_results.html', results=results)
+
+
 
 # Admin Dashboard Route
 @app.route('/admin', methods=['GET', 'POST'])

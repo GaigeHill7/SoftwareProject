@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search Results - Raider Tickets</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-top">
+        <div class="container">
+            <h1>Search Results</h1>
+        </div>
+    </header>
+
+    <!-- Search Results Section -->
+    <section class="search-results-section">
+        <div class="container">
+            {% if results %}
+                <div class="row">
+                    {% for movie in results %}
+                    <div class="col-md-4">
+                        <div class="movie-card">
+                            <img src="{{ url_for('static', filename='images/movies/Deadpool.jpg') }}" alt="Deadpool Poster" class="movie-poster">
+                            <h3 class="movie-title">{{ movie.title }}</h3>
+                            <p><strong>Synopsis:</strong> {{ movie.synopsis }}</p>
+                            <p><strong>Price:</strong> ${{ movie.price }}</p>
+                            <p><strong>Cast:</strong> {{ movie.cast }}</p>
+                            <p><strong>Status:</strong> {{ movie.status }}</p>
+                            <a href="{{ url_for('purchase_ticket', movie_id=movie.id) }}" class="btn btn-primary">Purchase Ticket</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-results">
+                    <h3>No movies found for your search.</h3>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Raider Tickets. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+</body>
+</html>
