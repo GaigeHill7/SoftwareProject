@@ -10,15 +10,15 @@ db.init_app(app)
 
 # Home Route
 @app.route('/')
-def SignUp():
-    return render_template('SignUp.html')  # Home page with navigation
+def home():
+    return render_template('home.html')  # Home page with navigation
 
 
 # Registration Route
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        name = request.form['name']
+        name = request.form['username']
         email = request.form['email']
         password = request.form['password']
         
@@ -42,19 +42,21 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
+        # Get username and password from the form
+        name = request.form['username']
         password = request.form['password']
         
         # Verify user credentials
-        user = User.query.filter_by(email=email, password=password).first()
+        user = User.query.filter_by(name=name, password=password).first()
         if user:
-            session['user_id'] = user.id
+            session['user_id'] = user.id  # Store user ID in session
             flash('Login successful!', 'success')
-            return redirect(url_for('SignUp'))
+            return redirect(url_for('home'))
         else:
-            flash('Invalid email or password. Please try again.', 'danger')
+            flash('Invalid username or password. Please try again.', 'danger')
     
     return render_template('login.html')
+
 
 
 # Browse Movies
@@ -93,7 +95,7 @@ def purchase_ticket(movie_id):
         db.session.commit()
         
         flash('Ticket purchased successfully!', 'success')
-        return redirect(url_for('SignUp'))
+        return redirect(url_for('home'))
     
     return render_template('purchase_ticket.html', movie=movie)
 
