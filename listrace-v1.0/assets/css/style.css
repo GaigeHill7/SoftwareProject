@@ -100,6 +100,12 @@ html,body{height: 100%;}
 .section-header{
     position: relative;
     text-align: center;
+    margin-bottom: 20px;
+}
+.container{
+    
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add spacing */
 }
 .section-header h2{
     color: #505866;
@@ -664,20 +670,37 @@ UserLogin
     padding:117px 0 95px;
     background: #f8fafb;
 }
-.explore-content{margin-top: 78px;}
+.explore-content{
+    margin-top: 78px;
+    margin: 0; /* Remove extra margins */
+    padding: 0 15px; /* Add consistent padding within the container */
+
+}
 
 .single-explore-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Evenly distribute space within the card */
+   
     background: #fff;
     border: 1px solid #edeff1;
     border-radius: 3px;
-    margin-bottom: 25px;
-    -webkit-transition: .3s linear; 
-    -moz-transition:.3s linear; 
-    -ms-transition:.3s linear; 
-    -o-transition:.3s linear;
-    transition: .3s linear;
+    box-sizing: border-box; /* Include padding and borders in height calculation */
 }
-.single-explore-img{position:relative;overflow: hidden;}
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap into the next row */
+    justify-content: space-between; /* Even spacing between cards */
+    gap: 20px; /* Consistent gap between items */
+   
+}
+.single-explore-img img {
+    width: 100%; /* Stretch image to container width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Prevent distortion */
+    border-radius: 8px; /* Match card corners */
+    display: block; /* Prevent spacing issues */
+}
 .single-explore-img:before {
     position: absolute;
     content: "";
@@ -739,6 +762,9 @@ UserLogin
 
 .single-explore-txt {
     padding: 26px 25px 24px 15px;
+    text-align: center; /* Center-align text */
+    line-height: 1.6; /* Improve readability */
+    min-height: 100px;
 }
 .single-explore-txt.bg-theme-1 .explore-rating{background: #70a9ff;}
 .single-explore-txt.bg-theme-2 .explore-rating{background: #00c61c;}
@@ -1170,5 +1196,18 @@ UserLogin
 @keyframes example {
     0%   {bottom:0px;}
     100%  {bottom:7px;}
+}
+@media (max-width: 1024px) {
+    .single-explore-item {
+        flex: 1 1 calc(50% - 20px); /* Two cards per row */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .single-explore-item {
+        flex: 1 1 calc(100% - 20px); /* One card per row */
+        max-width: calc(100% - 20px);
+    }
 }
 /*========================Thank you=================
