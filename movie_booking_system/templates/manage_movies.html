@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Manage Movies</title>
+</head>
+<body>
+    <header>
+        <h1>Manage Movies</h1>
+    </header>
+    <main>
+        <h2>Add New Movie</h2>
+        <form method="POST">
+            <input type="text" name="title" placeholder="Title" required>
+            <textarea name="synopsis" placeholder="Synopsis"></textarea>
+            <input type="text" name="cast" placeholder="Cast">
+            <input type="number" name="runtime" placeholder="Runtime (minutes)">
+            <select name="status">
+                <option value="Now Showing">Now Showing</option>
+                <option value="Upcoming">Upcoming</option>
+            </select>
+            <input type="number" step="0.01" name="price" placeholder="Price" required>
+            <input type="date" name="release_date" required>
+            <button type="submit">Add Movie</button>
+        </form>
+
+        <h2>Existing Movies</h2>
+        <ul>
+            {% for movie in movies %}
+            <li>
+                <h3>{{ movie.title }}</h3>
+                <p>{{ movie.synopsis }}</p>
+                <form method="POST" action="{{ url_for('delete_movie', movie_id=movie.id) }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

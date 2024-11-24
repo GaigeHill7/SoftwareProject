@@ -1,24 +1,15 @@
 from flask_migrate import Migrate
 from flask import Flask, render_template, redirect, url_for, request, flash, session
-from models import db, User, Movie, Ticket, Admin  # Ensure these models exist and are properly defined
+from models import db, User, Movie, Ticket, Admin
 from datetime import datetime
-
-
-
-
-# with app.app_context():
-#     db.create_all()
-
-
-
+import random
+import string
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_booking.db'
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 db.init_app(app)
-
-
 migrate = Migrate(app, db)
 
 # Default Route - Redirects to Login
@@ -26,13 +17,29 @@ migrate = Migrate(app, db)
 def default():
     return redirect(url_for('login'))
 
-# Home Route
+# # Home Route
+# @app.route('/home')
+# def home():
+#     if 'user_id' not in session:
+#         flash('Please log in to access the home page.', 'warning')
+#         return redirect(url_for('login'))
+#     return render_template('home.html')
+
+
+
+
+
+
 @app.route('/home')
 def home():
     if 'user_id' not in session:
         flash('Please log in to access the home page.', 'warning')
         return redirect(url_for('login'))
-    return render_template('home.html')  # Home page for logged-in users
+    
+    # Check if the user is an admin
+    is_admin = Admin.query.get(session.get('user_id'))
+    
+    return render_template('home.html', is_admin=is_admin)
 
 # User Registration Route
 @app.route('/register', methods=['GET', 'POST'])
@@ -61,19 +68,47 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name = request.form['username']
+        username = request.form['username']
         password = request.form['password']
 
-        # Verify user credentials
-        user = User.query.filter_by(name=name, password=password).first()
+        # Check if the user is an admin
+        admin = Admin.query.filter_by(name=username, password=password).first()
+        if admin:
+            session['user_id'] = admin.id
+            session['is_admin'] = True
+            flash('Admin login successful!', 'success')
+            return redirect(url_for('admin_dashboard'))
+
+        # Check if the user is a regular user
+        user = User.query.filter_by(name=username, password=password).first()
         if user:
             session['user_id'] = user.id
+            session['is_admin'] = False  # Explicitly set this to False for regular users
             flash('Login successful!', 'success')
             return redirect(url_for('browse_movies'))
-        else:
-            flash('Invalid username or password. Please try again.', 'danger')
+
+        # If neither admin nor user, flash an error message
+        flash('Invalid username or password. Please try again.', 'danger')
 
     return render_template('login.html')
+
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         password = request.form['password']
+
+#         # Verify user credentials
+#         user = User.query.filter_by(name=username, password=password).first()
+        
+#         if user:
+#             session['user_id'] = user.id
+#             flash('Login successful!', 'success')
+#             return redirect(url_for('browse_movies'))
+#         else:
+#             flash('Invalid username or password. Please try again.', 'danger')
+
+#     return render_template('login.html')
 
 # Logout Route
 @app.route('/logout')
@@ -88,7 +123,6 @@ def browse_movies():
     now_showing = Movie.query.filter_by(status="Now Showing").all()
     upcoming_movies = Movie.query.filter_by(status="Upcoming").all()
     return render_template('browse_movies.html', now_showing=now_showing, upcoming_movies=upcoming_movies)
-
 
 # Purchase Ticket Route
 @app.route('/purchase_ticket/<int:movie_id>', methods=['GET', 'POST'])
@@ -119,37 +153,7 @@ def search_movies():
     results = Movie.query.filter(Movie.title.ilike(f"%{query}%")).all()
     return render_template('search_results.html', results=results)
 
-
-# Proccess Purchase Route
-# @app.route('/process_purchase', methods=['POST'])
-# def process_purchase():
-#     movie_id = request.form.get('movie_id')
-#     screen_time = request.form.get('screen_time')
-#     num_tickets = int(request.form.get('num_tickets'))
-#     theater = request.form.get('theater')
-#     payment_method = request.form.get('payment_method')
-
-#     # Fetch the movie details
-#     movie = Movie.query.get(movie_id)
-#     total_cost = movie.price * num_tickets
-
-#     # Generate a unique barcode
-#     import random, string
-#     barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
-
-#     # Save the ticket information (optional, if database is needed)
-#     # ticket = Ticket(movie_id=movie_id, user_id=session['user_id'], barcode=barcode, num_seats=num_tickets)
-#     # db.session.add(ticket)
-#     # db.session.commit()
-
-#     return render_template('payment_confirmation.html', 
-#                            movie=movie, 
-#                            screen_time=screen_time, 
-#                            num_tickets=num_tickets, 
-#                            theater=theater, 
-#                            total_cost=total_cost, 
-#                            barcode=barcode)
-
+# Process Purchase Route
 @app.route('/process_purchase', methods=['POST'])
 def process_purchase():
     movie_id = request.form.get('movie_id')
@@ -162,12 +166,9 @@ def process_purchase():
     movie = Movie.query.get(movie_id)
     if not movie:
         flash("Movie not found. Please try again.", "danger")
-        return redirect(url_for('browse_movies'))  # Redirect user back to the movie list
+        return redirect(url_for('browse_movies'))
 
     total_cost = movie.price * num_tickets
-
-    # Generate a unique barcode
-    import random, string
     barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
 
     return render_template('payment_confirmation.html', 
@@ -178,39 +179,58 @@ def process_purchase():
                            total_cost=total_cost, 
                            barcode=barcode)
 
-@app.route('/test_movies')
-def test_movies():
-    movies = Movie.query.all()
-    for movie in movies:
-        print(f"ID: {movie.id}, Title: {movie.title}, Price: {movie.price}")
-    return "Check your console for movie data."
-
-
-
 # Admin Dashboard Route
-@app.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin_dashboard')
 def admin_dashboard():
     if 'user_id' not in session or not Admin.query.get(session['user_id']):
-        flash('Unauthorized access.', 'danger')
-        return redirect(url_for('login'))
+        flash("Access denied. Admins only.", "danger")
+        return redirect(url_for('home'))
+    #return render_template('admin_dashboard.html')
+    return render_template('admin_dashboard.html', admin=Admin.query.get(session['user_id']))
 
+# Manage Movies Route
+@app.route('/manage_movies', methods=['GET', 'POST'])
+def manage_movies():
+    if 'user_id' not in session or not Admin.query.get(session['user_id']):
+        flash("Access denied. Admins only.", "danger")
+        return redirect(url_for('home'))
+    
     movies = Movie.query.all()
     if request.method == 'POST':
         title = request.form['title']
-        description = request.form['description']
+        synopsis = request.form['synopsis']
+        cast = request.form['cast']
+        runtime = request.form['runtime']
         status = request.form['status']
         price = float(request.form['price'])
         release_date = datetime.strptime(request.form['release_date'], '%Y-%m-%d')
 
-        # Add new movie
-        new_movie = Movie(title=title, description=description, status=status, price=price, release_date=release_date)
+        new_movie = Movie(title=title, synopsis=synopsis, cast=cast, runtime=runtime,
+                          status=status, price=price, release_date=release_date)
         db.session.add(new_movie)
         db.session.commit()
-        flash(f'Movie "{title}" added successfully!', 'success')
+        flash(f"Movie '{title}' added successfully!", "success")
+        return redirect(url_for('manage_movies'))
+    
+    return render_template('manage_movies.html', movies=movies)
 
-    return render_template('admin_dashboard.html', movies=movies)
+# Generate Status Report Route
+@app.route('/generate_status_report')
+def generate_status_report():
+    if 'user_id' not in session or not Admin.query.get(session['user_id']):
+        flash("Access denied. Admins only.", "danger")
+        return redirect(url_for('home'))
+    
+    now_showing_count = Movie.query.filter_by(status="Now Showing").count()
+    upcoming_count = Movie.query.filter_by(status="Upcoming").count()
+    total_tickets = Ticket.query.count()
+    total_revenue = db.session.query(db.func.sum(Ticket.price)).scalar() or 0
 
-
+    return render_template('status_report.html', 
+                           now_showing_count=now_showing_count,
+                           upcoming_count=upcoming_count,
+                           total_tickets=total_tickets,
+                           total_revenue=total_revenue)
 
 # Run the Flask app
 if __name__ == '__main__':

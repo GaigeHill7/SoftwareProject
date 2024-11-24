@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <main>
+        <div class="admin-dashboard">
+            <button onclick="window.location.href='{{ url_for('manage_movies') }}'">Manage Movies</button>
+            <button onclick="window.location.href='{{ url_for('generate_status_report') }}'">Generate Status Report</button>
+        </div>
+    </main>
+</body>
+</html>
