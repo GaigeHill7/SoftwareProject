@@ -20,6 +20,7 @@
     <!-- Main Content -->
     <div class="purchase-ticket-container">
         <form action="/process_purchase" method="POST">
+            <input type="hidden" name="movie_id" value="{{ movie.id }}">
             <!-- Movie Title -->
             <h2>{{ movie.title }}</h2>
             <img src="{{ url_for('static', filename='images/movies/' + movie.title.replace(' ', '_') + '.jpg') }}" alt="{{ movie.title }}" class="movie-poster">

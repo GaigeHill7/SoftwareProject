@@ -121,6 +121,35 @@ def search_movies():
 
 
 # Proccess Purchase Route
+# @app.route('/process_purchase', methods=['POST'])
+# def process_purchase():
+#     movie_id = request.form.get('movie_id')
+#     screen_time = request.form.get('screen_time')
+#     num_tickets = int(request.form.get('num_tickets'))
+#     theater = request.form.get('theater')
+#     payment_method = request.form.get('payment_method')
+
+#     # Fetch the movie details
+#     movie = Movie.query.get(movie_id)
+#     total_cost = movie.price * num_tickets
+
+#     # Generate a unique barcode
+#     import random, string
+#     barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
+
+#     # Save the ticket information (optional, if database is needed)
+#     # ticket = Ticket(movie_id=movie_id, user_id=session['user_id'], barcode=barcode, num_seats=num_tickets)
+#     # db.session.add(ticket)
+#     # db.session.commit()
+
+#     return render_template('payment_confirmation.html', 
+#                            movie=movie, 
+#                            screen_time=screen_time, 
+#                            num_tickets=num_tickets, 
+#                            theater=theater, 
+#                            total_cost=total_cost, 
+#                            barcode=barcode)
+
 @app.route('/process_purchase', methods=['POST'])
 def process_purchase():
     movie_id = request.form.get('movie_id')
@@ -131,16 +160,15 @@ def process_purchase():
 
     # Fetch the movie details
     movie = Movie.query.get(movie_id)
+    if not movie:
+        flash("Movie not found. Please try again.", "danger")
+        return redirect(url_for('browse_movies'))  # Redirect user back to the movie list
+
     total_cost = movie.price * num_tickets
 
     # Generate a unique barcode
     import random, string
     barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
-
-    # Save the ticket information (optional, if database is needed)
-    # ticket = Ticket(movie_id=movie_id, user_id=session['user_id'], barcode=barcode, num_seats=num_tickets)
-    # db.session.add(ticket)
-    # db.session.commit()
 
     return render_template('payment_confirmation.html', 
                            movie=movie, 
@@ -149,6 +177,13 @@ def process_purchase():
                            theater=theater, 
                            total_cost=total_cost, 
                            barcode=barcode)
+
+@app.route('/test_movies')
+def test_movies():
+    movies = Movie.query.all()
+    for movie in movies:
+        print(f"ID: {movie.id}, Title: {movie.title}, Price: {movie.price}")
+    return "Check your console for movie data."
 
 
 
