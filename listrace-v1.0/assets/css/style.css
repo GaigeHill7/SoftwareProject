@@ -1025,33 +1025,34 @@ UserLogin
 }/*subscribe-title*/
 
 
-/*custom-input-group*/
 .subscription-input-group {
-    position: relative;
-    text-align: center;
-    max-width: 630px;
-    margin:0 auto;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 10px; /* Add spacing between elements */
+    align-items: center; /* Center elements horizontally */
 }
 
-.subscription-input-group .subscription-input-form{
-    display: inline-block;
-    width: 630px;
-    height: 60px;
-    padding-left:30px;
-    font-size: 16px;
-    color: #a5adb3;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
-    border:1px solid #fff;
-    box-shadow: 0 0px 10px rgba(21,19,19,.1);
-     -webkit-transition:0.3s linear;
-    -moz-transition:0.3s linear;
-    -o-transition:0.3s linear;
-    transition:0.3s linear;
+.subscription-input-group input,
+.subscription-input-group textarea {
+    width: 100%; /* Make input and textarea take the full width of the form */
+    max-width: 400px; /* Limit the maximum width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
-.subscription-input-group:hover .subscription-input-form{
-    box-shadow: 0 5px 20px rgba(21,19,19,.4);
+
+.subscription-input-group button {
+    background-color: #f05d5e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.subscription-input-group button:hover {
+    background-color: #d94444; /* Darken button color on hover */
 }
 /*custom-input-group*/
 
