@@ -120,6 +120,37 @@ def search_movies():
     return render_template('search_results.html', results=results)
 
 
+# Proccess Purchase Route
+@app.route('/process_purchase', methods=['POST'])
+def process_purchase():
+    movie_id = request.form.get('movie_id')
+    screen_time = request.form.get('screen_time')
+    num_tickets = int(request.form.get('num_tickets'))
+    theater = request.form.get('theater')
+    payment_method = request.form.get('payment_method')
+
+    # Fetch the movie details
+    movie = Movie.query.get(movie_id)
+    total_cost = movie.price * num_tickets
+
+    # Generate a unique barcode
+    import random, string
+    barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
+
+    # Save the ticket information (optional, if database is needed)
+    # ticket = Ticket(movie_id=movie_id, user_id=session['user_id'], barcode=barcode, num_seats=num_tickets)
+    # db.session.add(ticket)
+    # db.session.commit()
+
+    return render_template('payment_confirmation.html', 
+                           movie=movie, 
+                           screen_time=screen_time, 
+                           num_tickets=num_tickets, 
+                           theater=theater, 
+                           total_cost=total_cost, 
+                           barcode=barcode)
+
+
 
 # Admin Dashboard Route
 @app.route('/admin', methods=['GET', 'POST'])
@@ -143,6 +174,8 @@ def admin_dashboard():
         flash(f'Movie "{title}" added successfully!', 'success')
 
     return render_template('admin_dashboard.html', movies=movies)
+
+
 
 # Run the Flask app
 if __name__ == '__main__':

@@ -1,67 +1,108 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- meta data -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Search Results - Raider Tickets</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-    <!-- Stylesheets -->
-    <link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png" />
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header-top">
-        <div class="container">
-            <h1>Search Results</h1>
-        </div>
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('browse_movies') }}">Browse Movies</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
     </header>
+    <main>
+        <h1>Search Results</h1>
+        {% if results %}
+            {% for movie in results %}
+                <div class="movie-card">
 
-    <!-- Search Results Section -->
-    <section class="search-results-section">
-        <div class="container">
-            {% if results %}
-                <div class="row">
-                    {% for movie in results %}
-                    <div class="col-md-4">
-                        <div class="movie-card">
-                            <img src="{{ url_for('static', filename='images/movies/Deadpool.jpg') }}" alt="Deadpool Poster" class="movie-poster">
-                            <h3 class="movie-title">{{ movie.title }}</h3>
-                            <p><strong>Synopsis:</strong> {{ movie.synopsis }}</p>
-                            <p><strong>Price:</strong> ${{ movie.price }}</p>
-                            <p><strong>Cast:</strong> {{ movie.cast }}</p>
-                            <p><strong>Status:</strong> {{ movie.status }}</p>
-                            <a href="{{ url_for('purchase_ticket', movie_id=movie.id) }}" class="btn btn-primary">Purchase Ticket</a>
-                        </div>
+                    <img src="{{ url_for('static', filename='images/movies/' + movie.title.replace(' ', '_') + '.jpg') }}" alt="{{ movie.title }}" class="movie-poster">
+                
+                    <h2>{{ movie.title }}</h2>
+                    <button class="details-button" onclick="toggleDetails('{{ movie.id }}')">Movie Details</button>
+                    <div class="movie-details" id="details-{{ movie.id }}" style="display: none;">
+                        <p><strong>Synopsis:</strong> {{ movie.synopsis }}</p>
+                        <p><strong>Cast:</strong> {{ movie.cast }}</p>
+                        <p><strong>Runtime:</strong> {{ movie.runtime }} minutes</p>
+                        <p><strong>Price:</strong> ${{ movie.price }}</p>
+                        <button class="purchase-button" onclick="location.href='{{ url_for('purchase_ticket', movie_id=movie.id) }}';">Buy Ticket</button>
+
                     </div>
-                    {% endfor %}
                 </div>
-            {% else %}
-                <div class="no-results">
-                    <h3>No movies found for your search.</h3>
-                </div>
-            {% endif %}
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Raider Tickets. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/custom.js"></script>
+            {% endfor %}
+        {% else %}
+            <p>No movies found for your search query.</p>
+        {% endif %}
+    </main>
+    <script>
+        function toggleDetails(movieId) {
+            const details = document.getElementById(`details-${movieId}`);
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
+        }
+        .movie-card {
+            background: #fff;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 400px;
+            text-align: center;
+        }
+        .movie-poster {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        .details-button, .purchase-button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .details-button:hover, .purchase-button:hover {
+            background-color: #0056b3;
+        }
+        .movie-details {
+            margin-top: 10px;
+            text-align: left;
+        }
+    </style>
 </body>
 </html>

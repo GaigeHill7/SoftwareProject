@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta and Title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Ticket</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1 class="page-title">Purchase Ticket</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="purchase-ticket-container">
+        <form action="/process_purchase" method="POST">
+            <!-- Movie Title -->
+            <h2>{{ movie.title }}</h2>
+            <img src="{{ url_for('static', filename='images/movies/' + movie.title.replace(' ', '_') + '.jpg') }}" alt="{{ movie.title }}" class="movie-poster">
+
+            <!-- Screen Time Selection -->
+            <div class="form-group">
+                <label for="screen_time">Select Screen Time:</label>
+                <select id="screen_time" name="screen_time" required>
+                    <option value="" disabled selected>Select a time</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="3:00 PM">3:00 PM</option>
+                    <option value="6:00 PM">6:00 PM</option>
+                    <option value="9:00 PM">9:00 PM</option>
+                </select>
+            </div>
+
+            <!-- Number of Tickets -->
+            <div class="form-group">
+                <label for="num_tickets">Number of Tickets:</label>
+                <input type="number" id="num_tickets" name="num_tickets" min="1" max="10" value="1" required>
+            </div>
+
+            <!-- Theater Selection -->
+            <div class="form-group">
+                <label for="theater">Select Theater:</label>
+                <select id="theater" name="theater" required>
+                    <option value="" disabled selected>Select a theater</option>
+                    <option value="Lubbock">Lubbock</option>
+                    <option value="Amarillo">Amarillo</option>
+                    <option value="Levelland">Levelland</option>
+                    <option value="Plainview">Plainview</option>
+                    <option value="Synder">Synder</option>
+                    <option value="Abilene">Abilene</option>
+                </select>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="form-group">
+                <label for="payment_method">Preferred Payment Method:</label>
+                <select id="payment_method" name="payment_method" required>
+                    <option value="" disabled selected>Select a payment method</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="PayPal">PayPal</option>
+                </select>
+            </div>
+
+            <!-- Summary of Order -->
+            <div class="summary">
+                <h3>Order Summary</h3>
+                <p><strong>Number of Tickets:</strong> <span id="summary_tickets">1</span></p>
+                <p><strong>Total Cost:</strong> $<span id="summary_cost">{{ movie.price }}</span></p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Purchase Tickets</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Raider Tickets</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const ticketInput = document.getElementById('num_tickets');
+        const summaryTickets = document.getElementById('summary_tickets');
+        const summaryCost = document.getElementById('summary_cost');
+        const ticketPrice = {{ movie.price }};
+
+        // Update Summary on Ticket Input Change
+        ticketInput.addEventListener('input', () => {
+            const numTickets = ticketInput.value;
+            summaryTickets.textContent = numTickets;
+            summaryCost.textContent = (numTickets * ticketPrice).toFixed(2);
+        });
+    </script>
+</body>
+
+</html>

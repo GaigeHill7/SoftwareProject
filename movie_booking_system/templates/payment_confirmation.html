@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta and Title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1 class="page-title">Payment Confirmation</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="confirmation-container">
+        <!-- Confirmation Message -->
+        <div class="confirmation-message">
+            <h2>Payment Confirmed!</h2>
+            <p>Thank you for your purchase. Below is your ticket information.</p>
+        </div>
+
+        <!-- Ticket Details -->
+        <div class="ticket-details">
+            <h3>Ticket Information</h3>
+            <p><strong>Movie:</strong> {{ movie.title }}</p>
+            <p><strong>Screen Time:</strong> {{ screen_time }}</p>
+            <p><strong>Theater:</strong> {{ theater }}</p>
+            <p><strong>Number of Tickets:</strong> {{ num_tickets }}</p>
+            <p><strong>Total Cost:</strong> ${{ total_cost }}</p>
+        </div>
+
+        <!-- Barcode -->
+        <div class="barcode-section">
+            <h3>Your Barcode</h3>
+            <div class="barcode">
+                {{ barcode }}
+            </div>
+        </div>
+
+        <!-- Print Ticket Button -->
+        <button onclick="window.print()" class="print-btn">Print Ticket</button>
+        <a href="{{ url_for('home') }}" class="back-btn">Return to Home</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Raider Tickets</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Example: Generating a unique barcode using random alphanumeric characters
+        const barcodeElement = document.querySelector('.barcode');
+        const generateBarcode = () => {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let barcode = '';
+            for (let i = 0; i < 12; i++) {
+                barcode += chars[Math.floor(Math.random() * chars.length)];
+            }
+            return barcode;
+        };
+
+        // Set the barcode content dynamically
+        if (!barcodeElement.textContent.trim()) {
+            barcodeElement.textContent = generateBarcode();
+        }
+    </script>
+</body>
+
+</html>
