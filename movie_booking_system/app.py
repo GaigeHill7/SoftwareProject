@@ -1,10 +1,11 @@
 from flask_migrate import Migrate
 from flask import Flask, render_template, redirect, url_for, request, flash, session
-from models import db, User, Movie, Ticket, Admin
+from models import db, User, Movie, Ticket, Admin, Review
 from datetime import datetime
 import random
 import string
 import os
+import datetime 
 
 
 app = Flask(__name__)
@@ -326,6 +327,53 @@ def status_report():
         movies_playing=movies_playing,
         upcoming_movies=upcoming_movies
     )
+
+
+@app.route('/add_review/<int:movie_id>', methods=['POST'])
+def add_review(movie_id):
+    content = request.form['review_content']  # Make sure the name in the form matches this key
+    review = Review(content=content, user_id=session['user_id'], movie_id=movie_id)
+    db.session.add(review)
+    db.session.commit()
+    flash("Review added successfully!", "success")
+    return redirect(url_for('movie_details', movie_id=movie_id))
+
+
+# @app.route('/add_review/<int:movie_id>', methods=['POST'])
+# def add_review(movie_id):
+#     if 'user_id' not in session:
+#         flash('You need to be logged in to write a review.', 'warning')
+#         return redirect(url_for('login'))
+
+#     content = request.form['review_content']
+#     if not content.strip():
+#         flash('Review content cannot be empty.', 'danger')
+#         return redirect(url_for('movie_details', movie_id=movie_id))
+
+#     # Save the review to the database
+#     review = Review(
+#         user_id=session['user_id'],
+#         movie_id=movie_id,
+#         content=content.strip()
+#     )
+#     db.session.add(review)
+#     db.session.commit()
+#     flash('Review added successfully!', 'success')
+#     return redirect(url_for('movie_details', movie_id=movie_id))
+
+
+@app.route('/movie_details/<int:movie_id>', methods=['GET'])
+def movie_details(movie_id):
+    movie = Movie.query.get_or_404(movie_id)
+    reviews = Review.query.filter_by(movie_id=movie_id).all()  # Fetch reviews for the movie
+    print("Fetched Reviews:", reviews)  # Debugging
+    return render_template('movie_details.html', movie=movie, reviews=reviews)
+
+@app.route('/movie_reviews/<int:movie_id>')
+def movie_reviews(movie_id):
+    movie = Movie.query.get_or_404(movie_id)
+    reviews = Review.query.filter_by(movie_id=movie_id).all()
+    return render_template('movie_reviews.html', movie=movie, reviews=reviews)
 
 
 # Run the Flask app

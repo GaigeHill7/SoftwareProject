@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import datetime 
 
 db = SQLAlchemy()
 
@@ -52,3 +53,4 @@ class Review(db.Model):
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     movie_id = db.Column(db.Integer, db.ForeignKey('movie.id'), nullable=False)
+
