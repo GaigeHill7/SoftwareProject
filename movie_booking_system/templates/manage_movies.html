@@ -1,43 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Manage Movies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Manage Movies</h1>
-    </header>
-    <main>
-        <h2>Add New Movie</h2>
-        <form method="POST">
-            <input type="text" name="title" placeholder="Title" required>
-            <textarea name="synopsis" placeholder="Synopsis"></textarea>
-            <input type="text" name="cast" placeholder="Cast">
-            <input type="number" name="runtime" placeholder="Runtime (minutes)">
-            <select name="status">
-                <option value="Now Showing">Now Showing</option>
-                <option value="Upcoming">Upcoming</option>
-            </select>
-            <input type="number" step="0.01" name="price" placeholder="Price" required>
-            <input type="date" name="release_date" required>
-            <button type="submit">Add Movie</button>
-        </form>
+    <div class="container mt-5">
+        <h1 class="text-center">Manage Movies</h1>
+        <hr>
 
-        <h2>Existing Movies</h2>
-        <ul>
-            {% for movie in movies %}
-            <li>
-                <h3>{{ movie.title }}</h3>
-                <p>{{ movie.synopsis }}</p>
-                <form method="POST" action="{{ url_for('delete_movie', movie_id=movie.id) }}">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
-    </main>
+        <!-- Add Movie Form -->
+        <h2>Add a New Movie</h2>
+        <form method="POST" action="{{ url_for('manage_movies') }}">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter movie title" required>
+            </div>
+            <div class="form-group">
+                <label for="synopsis">Synopsis</label>
+                <textarea class="form-control" id="synopsis" name="synopsis" rows="3" placeholder="Enter movie synopsis" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="cast">Cast</label>
+                <textarea class="form-control" id="cast" name="cast" rows="2" placeholder="Enter movie cast" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="runtime">Runtime (minutes)</label>
+                <input type="number" class="form-control" id="runtime" name="runtime" placeholder="Enter runtime in minutes" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option value="Now Showing">Now Showing</option>
+                    <option value="Upcoming">Upcoming</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price">Ticket Price ($)</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" placeholder="Enter ticket price" required>
+            </div>
+            <div class="form-group">
+                <label for="showtime">Showtime</label>
+                <input type="text" class="form-control" id="showtime" name="showtime" placeholder="Enter showtime (e.g., 7:00 PM)" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add Movie</button>
+        </form>
+        <hr>
+
+        <!-- Movie List -->
+        <h2>Current Movies</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Synopsis</th>
+                    <th>Cast</th>
+                    <th>Runtime</th>
+                    <th>Status</th>
+                    <th>Price</th>
+                    <th>Showtime</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.synopsis }}</td>
+                    <td>{{ movie.cast }}</td>
+                    <td>{{ movie.runtime }} mins</td>
+                    <td>{{ movie.status }}</td>
+                    <td>${{ movie.price }}</td>
+                    <td>{{ movie.showtime }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('delete_movie', movie_id=movie.id) }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>

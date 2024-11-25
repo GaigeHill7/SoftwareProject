@@ -24,7 +24,8 @@ class Movie(db.Model):
     runtime = db.Column(db.Integer, nullable=True)
     status = db.Column(db.String(20), nullable=False)  # 'Now Showing' or 'Upcoming'
     price = db.Column(db.Float, nullable=False)
-    release_date = db.Column(db.DateTime, nullable=False)
+    showtime = db.Column(db.String(50), nullable=True)  # e.g., "7:00 PM"
+    release_date = db.Column(db.DateTime, nullable=True)
     poster = db.Column(db.String(100), nullable=True)  # Path or filename of the poster image
 
 

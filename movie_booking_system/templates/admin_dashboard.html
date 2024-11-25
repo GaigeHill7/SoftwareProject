@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Admin Dashboard</h1>
-    </header>
-    <main>
-        <div class="admin-dashboard">
-            <button onclick="window.location.href='{{ url_for('manage_movies') }}'">Manage Movies</button>
-            <button onclick="window.location.href='{{ url_for('generate_status_report') }}'">Generate Status Report</button>
+    <div class="container mt-5">
+        <h1 class="text-center">Admin Dashboard</h1>
+        <hr>
+
+        <!-- Admin Options -->
+        <div class="row mt-4">
+            <!-- Manage Movies Button -->
+            <div class="col-md-6 text-center">
+                <a href="{{ url_for('manage_movies') }}" class="btn btn-primary btn-lg w-75">Manage Movies</a>
+            </div>
+
+            <!-- Generate Status Report Button -->
+            <div class="col-md-6 text-center">
+                <a href="{{ url_for('generate_status_report') }}" class="btn btn-info btn-lg w-75">Generate Status Report</a>
+            </div>
         </div>
-    </main>
+
+        <!-- Logout Button -->
+        <div class="mt-5 text-center">
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Log Out</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>
