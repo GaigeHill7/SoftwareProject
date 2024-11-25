@@ -100,12 +100,6 @@ html,body{height: 100%;}
 .section-header{
     position: relative;
     text-align: center;
-    margin-bottom: 20px;
-}
-.container{
-    
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Add spacing */
 }
 .section-header h2{
     color: #505866;
@@ -347,224 +341,6 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     margin-left:  12px;
 }
 
-.AdminLogin {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    margin: 20px auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.AdminLogin h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.AdminLogin .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.AdminLogin label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
-}
-
-.AdminLogin input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.AdminLogin button {
-    padding: 10px 20px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.AdminLogin button:hover {
-    background: #0056b3;
-}
-
-#error-message {
-    margin-top: 10px;
-}
-/*user-login-section
-UserLogin
-/* User Login Specific Styles */
-.UserLogin {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    margin: 20px auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.UserLogin h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.UserLogin .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.UserLogin label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
-}
-
-.UserLogin input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.UserLogin button {
-    padding: 10px 20px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.UserLogin button:hover {
-    background: #0056b3;
-}
-
-/* User Sign UP Specific Styles */
-.SignUp {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    margin: 20px auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.SignUp h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.SignUp .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.SignUp label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
-}
-
-.SignUp input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.SignUp button {
-    padding: 10px 20px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.SignUp button:hover {
-    background: #0056b3;
-}
-
-/*Buy CSS*/
-/* User Sign UP Specific Styles */
-.BuyPage {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    margin: 20px auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.BuyPage h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.BuyPage .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.SignUp label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
-}
-
-.BuyPage input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.BuyPage button {
-    padding: 10px 20px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.BuyPage button:hover {
-    background: #0056b3;
-}
-
-#error-message {
-    margin-top: 10px;
-}
-
-
 /*-------------------------------------
         5. List-topuics
 --------------------------------------*/
@@ -670,37 +446,24 @@ UserLogin
     padding:117px 0 95px;
     background: #f8fafb;
 }
-.explore-content{
-    margin-top: 78px;
-    margin: 0; /* Remove extra margins */
-    padding: 0 15px; /* Add consistent padding within the container */
-
-}
+.explore-content{margin-top: 78px;}
 
 .single-explore-item {
-    display: flex;
+    height:800px;
+    display:flex;
     flex-direction: column;
-    justify-content: space-between; /* Evenly distribute space within the card */
-   
+    justify-content: space-between;
     background: #fff;
     border: 1px solid #edeff1;
     border-radius: 3px;
-    box-sizing: border-box; /* Include padding and borders in height calculation */
+    margin-bottom: 25px;
+    -webkit-transition: .3s linear; 
+    -moz-transition:.3s linear; 
+    -ms-transition:.3s linear; 
+    -o-transition:.3s linear;
+    transition: .3s linear;
 }
-.row {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap into the next row */
-    justify-content: space-between; /* Even spacing between cards */
-    gap: 20px; /* Consistent gap between items */
-   
-}
-.single-explore-img img {
-    width: 100%; /* Stretch image to container width */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Prevent distortion */
-    border-radius: 8px; /* Match card corners */
-    display: block; /* Prevent spacing issues */
-}
+.single-explore-img{position:relative;overflow: hidden;}
 .single-explore-img:before {
     position: absolute;
     content: "";
@@ -762,9 +525,6 @@ UserLogin
 
 .single-explore-txt {
     padding: 26px 25px 24px 15px;
-    text-align: center; /* Center-align text */
-    line-height: 1.6; /* Improve readability */
-    min-height: 100px;
 }
 .single-explore-txt.bg-theme-1 .explore-rating{background: #70a9ff;}
 .single-explore-txt.bg-theme-2 .explore-rating{background: #00c61c;}
@@ -1025,34 +785,33 @@ UserLogin
 }/*subscribe-title*/
 
 
+/*custom-input-group*/
 .subscription-input-group {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    gap: 10px; /* Add spacing between elements */
-    align-items: center; /* Center elements horizontally */
+    position: relative;
+    text-align: center;
+    max-width: 630px;
+    margin:0 auto;
 }
 
-.subscription-input-group input,
-.subscription-input-group textarea {
-    width: 100%; /* Make input and textarea take the full width of the form */
-    max-width: 400px; /* Limit the maximum width */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.subscription-input-group button {
-    background-color: #f05d5e;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.subscription-input-group .subscription-input-form{
+    display: inline-block;
+    width: 630px;
+    height: 60px;
+    padding-left:30px;
     font-size: 16px;
+    color: #a5adb3;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    border:1px solid #fff;
+    box-shadow: 0 0px 10px rgba(21,19,19,.1);
+     -webkit-transition:0.3s linear;
+    -moz-transition:0.3s linear;
+    -o-transition:0.3s linear;
+    transition:0.3s linear;
 }
-
-.subscription-input-group button:hover {
-    background-color: #d94444; /* Darken button color on hover */
+.subscription-input-group:hover .subscription-input-form{
+    box-shadow: 0 5px 20px rgba(21,19,19,.4);
 }
 /*custom-input-group*/
 
@@ -1197,18 +956,5 @@ UserLogin
 @keyframes example {
     0%   {bottom:0px;}
     100%  {bottom:7px;}
-}
-@media (max-width: 1024px) {
-    .single-explore-item {
-        flex: 1 1 calc(50% - 20px); /* Two cards per row */
-        max-width: calc(50% - 20px);
-    }
-}
-
-@media (max-width: 768px) {
-    .single-explore-item {
-        flex: 1 1 calc(100% - 20px); /* One card per row */
-        max-width: calc(100% - 20px);
-    }
 }
 /*========================Thank you=================
