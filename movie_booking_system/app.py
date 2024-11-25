@@ -19,9 +19,6 @@ os.makedirs(app.instance_path, exist_ok=True)
 db.init_app(app)
 
 
-#app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_booking.db'
-#app.config['SECRET_KEY'] = 'your_secret_key'
 
 #db.init_app(app)
 migrate = Migrate(app, db)
@@ -30,16 +27,6 @@ migrate = Migrate(app, db)
 @app.route('/')
 def default():
     return redirect(url_for('login'))
-
-# # Home Route
-# @app.route('/home')
-# def home():
-#     if 'user_id' not in session:
-#         flash('Please log in to access the home page.', 'warning')
-#         return redirect(url_for('login'))
-#     return render_template('home.html')
-
-
 
 
 
@@ -106,23 +93,6 @@ def login():
 
     return render_template('login.html')
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
-
-#         # Verify user credentials
-#         user = User.query.filter_by(name=username, password=password).first()
-        
-#         if user:
-#             session['user_id'] = user.id
-#             flash('Login successful!', 'success')
-#             return redirect(url_for('browse_movies'))
-#         else:
-#             flash('Invalid username or password. Please try again.', 'danger')
-
-#     return render_template('login.html')
 
 # Logout Route
 @app.route('/logout')
@@ -192,11 +162,12 @@ def process_purchase():
         flash("Movie price is not set. Please contact support.", "danger")
         return redirect(url_for('browse_movies'))
 
-    # Generate a unique barcode
-    barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
+    # Total cost of tickets
+    total_cost = movie.price * num_tickets
 
     # Create tickets and save to the database
     for _ in range(num_tickets):
+        barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))  # Generate unique barcode
         ticket = Ticket(
             showtime=screen_time,
             price=movie.price,
@@ -205,38 +176,16 @@ def process_purchase():
             movie_id=movie.id
         )
         db.session.add(ticket)
+
     db.session.commit()
 
-    total_cost = movie.price * num_tickets
     return render_template('payment_confirmation.html',
                            movie=movie,
                            screen_time=screen_time,
                            num_tickets=num_tickets,
                            theater=theater,
                            total_cost=total_cost,
-                           barcode=barcode)
-
-
-# @app.route('/process_purchase', methods=['POST'])
-# def process_purchase():
-#     movie_id = request.form.get('movie_id')
-#     screen_time = request.form.get('screen_time')
-#     num_tickets = int(request.form.get('num_tickets'))
-#     user_id = session.get('user_id')
-#     price = request.form.get('price')  # Assuming you get price from the form or elsewhere
-
-#     # Generate a unique barcode for each ticket
-#     tickets = []
-#     for _ in range(num_tickets):
-#         barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
-#         ticket = Ticket(movie_id=movie_id, showtime=screen_time, price=price, user_id=user_id, barcode=barcode)
-#         db.session.add(ticket)
-#         tickets.append(ticket)
-
-#     db.session.commit()
-#     flash(f'{num_tickets} ticket(s) purchased successfully!', 'success')
-
-#     return render_template('payment_confirmation.html', tickets=tickets)
+                           barcode=barcode)  # Return the last generated barcode
 
 # @app.route('/process_purchase', methods=['POST'])
 # def process_purchase():
@@ -244,7 +193,6 @@ def process_purchase():
 #     screen_time = request.form.get('screen_time')
 #     num_tickets = int(request.form.get('num_tickets'))
 #     theater = request.form.get('theater')
-#     payment_method = request.form.get('payment_method')
 
 #     # Fetch the movie details
 #     movie = Movie.query.get(movie_id)
@@ -252,16 +200,36 @@ def process_purchase():
 #         flash("Movie not found. Please try again.", "danger")
 #         return redirect(url_for('browse_movies'))
 
-#     total_cost = movie.price * num_tickets
+#     # Check if the movie price is set
+#     if movie.price is None:
+#         flash("Movie price is not set. Please contact support.", "danger")
+#         return redirect(url_for('browse_movies'))
+
+#     # Generate a unique barcode
 #     barcode = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
 
-#     return render_template('payment_confirmation.html', 
-#                            movie=movie, 
-#                            screen_time=screen_time, 
-#                            num_tickets=num_tickets, 
-#                            theater=theater, 
-#                            total_cost=total_cost, 
+#     # Create tickets and save to the database
+#     for _ in range(num_tickets):
+#         ticket = Ticket(
+#             showtime=screen_time,
+#             price=movie.price,
+#             barcode=barcode,
+#             user_id=session.get('user_id'),
+#             movie_id=movie.id
+#         )
+#         db.session.add(ticket)
+#     db.session.commit()
+
+#     total_cost = movie.price * num_tickets
+#     return render_template('payment_confirmation.html',
+#                            movie=movie,
+#                            screen_time=screen_time,
+#                            num_tickets=num_tickets,
+#                            theater=theater,
+#                            total_cost=total_cost,
 #                            barcode=barcode)
+
+
 
 # Admin Dashboard Route
 @app.route('/admin_dashboard')
@@ -272,70 +240,6 @@ def admin_dashboard():
     #return render_template('admin_dashboard.html')
     return render_template('admin_dashboard.html', admin=Admin.query.get(session['user_id']))
 
-# Manage Movies Route
-# @app.route('/manage_movies', methods=['GET', 'POST'])
-# def manage_movies():
-#     if 'user_id' not in session or not Admin.query.get(session['user_id']):
-#         flash("Access denied. Admins only.", "danger")
-#         return redirect(url_for('home'))
-    
-#     movies = Movie.query.all()
-#     if request.method == 'POST':
-#         title = request.form['title']
-#         synopsis = request.form['synopsis']
-#         cast = request.form['cast']
-#         runtime = request.form['runtime']
-#         status = request.form['status']
-#         price = float(request.form['price'])
-#         release_date = datetime.strptime(request.form['release_date'], '%Y-%m-%d')
-
-#         new_movie = Movie(title=title, synopsis=synopsis, cast=cast, runtime=runtime,
-#                           status=status, price=price, release_date=release_date)
-#         db.session.add(new_movie)
-#         db.session.commit()
-#         flash(f"Movie '{title}' added successfully!", "success")
-#         return redirect(url_for('manage_movies'))
-    
-#     return render_template('manage_movies.html', movies=movies)
-
-# Generate Status Report Route
-# @app.route('/generate_status_report')
-# def generate_status_report():
-#     if 'user_id' not in session or not Admin.query.get(session['user_id']):
-#         flash("Access denied. Admins only.", "danger")
-#         return redirect(url_for('home'))
-    
-#     now_showing_count = Movie.query.filter_by(status="Now Showing").count()
-#     upcoming_count = Movie.query.filter_by(status="Upcoming").count()
-#     total_tickets = Ticket.query.count()
-#     total_revenue = db.session.query(db.func.sum(Ticket.price)).scalar() or 0
-
-#     return render_template('status_report.html', 
-#                            now_showing_count=now_showing_count,
-#                            upcoming_count=upcoming_count,
-#                            total_tickets=total_tickets,
-#                            total_revenue=total_revenue)
-
-
-
-# @app.route('/generate_status_report')
-# def generate_status_report():
-#     if 'user_id' not in session or not Admin.query.get(session['user_id']):
-#         flash("Access denied. Admins only.", "danger")
-#         return redirect(url_for('home'))
-
-#     now_showing_movies = Movie.query.filter_by(status="Now Showing").all()
-#     upcoming_movies = Movie.query.filter_by(status="Upcoming").all()
-#     total_tickets = Ticket.query.count()
-#     total_revenue = db.session.query(db.func.sum(Ticket.price)).scalar() or 0
-
-#     return render_template(
-#         'status_report.html',
-#         now_showing_movies=now_showing_movies,
-#         upcoming_movies=upcoming_movies,
-#         total_tickets=total_tickets,
-#         total_revenue=total_revenue
-#     )
 
 @app.route('/generate_status_report')
 def generate_status_report():
