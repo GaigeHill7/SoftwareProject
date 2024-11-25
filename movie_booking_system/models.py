@@ -30,13 +30,16 @@ class Movie(db.Model):
 
 
 
+
+
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     showtime = db.Column(db.String(50), nullable=False)
-    num_seats = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    barcode = db.Column(db.String(100), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    movie_id = db.Column(db.Integer, db.ForeignKey('movie.id'), nullable=False)
+    barcode = db.Column(db.String(100), unique=True, nullable=True)
+
 
 class Payment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
