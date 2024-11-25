@@ -784,6 +784,52 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     margin-top: 28px;
 }/*subscribe-title*/
 
+.subscription-input-group form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.subscription-input-group label {
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.subscription-input-group input,
+.subscription-input-group textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.subscription-input-group textarea {
+    height: 100px; /* Set a reasonable height */
+    resize: none; /* Prevent resizing for consistency */
+}
+
+.subscription-input-group button {
+    background-color: #f05d5e;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 400px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.subscription-input-group button:hover {
+    background-color: #d95454; /* Slightly darker on hover */
+}
 
 /*custom-input-group*/
 .subscription-input-group {
