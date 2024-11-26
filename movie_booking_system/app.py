@@ -69,6 +69,7 @@ def register():
 # User Login Route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error_message = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -82,17 +83,18 @@ def login():
             return redirect(url_for('admin_dashboard'))
 
         # Check if the user is a regular user
-        user = User.query.filter_by(name=username, password=password).first()
+        user = User.query.filter_by(username=username, password=password).first()
         if user:
             session['user_id'] = user.id
-            session['is_admin'] = False  # Explicitly set this to False for regular users
+            session['is_admin'] = False
             flash('Login successful!', 'success')
             return redirect(url_for('browse_movies'))
 
-        # If neither admin nor user, flash an error message
-        flash('Invalid username or password. Please try again.', 'danger')
+        # If neither admin nor user, set an error message
+        error_message = 'Invalid username or password. Please try again.'
 
-    return render_template('login.html')
+    return render_template('login.html', error_message=error_message)
+
 
 
 # Logout Route
@@ -105,8 +107,8 @@ def logout():
 # Browse Movies Route
 @app.route('/browse_movies')
 def browse_movies():
-    now_showing = Movie.query.filter_by(status="Now Showing").all()
-    upcoming_movies = Movie.query.filter_by(status="Upcoming").all()
+    now_showing = Movie.query.filter_by(is_now_showing=True).all()  # Example query
+    upcoming_movies = Movie.query.filter_by(is_upcoming=True).all()  # Example query
     return render_template('browse_movies.html', now_showing=now_showing, upcoming_movies=upcoming_movies)
 
 # Purchase Ticket Route

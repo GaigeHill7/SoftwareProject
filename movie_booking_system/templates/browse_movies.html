@@ -15,35 +15,35 @@
         <title>Raider Tickets</title>
 
         <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+		<link rel="shortcut icon" type="image/icon" href="static/logo/favicon.png"/>
        
         <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="static/css/font-awesome.min.css">
 
         <!--linear icon css-->
-		<link rel="stylesheet" href="assets/css/linearicons.css">
+		<link rel="stylesheet" href="static/css/linearicons.css">
 
 		<!--animate.css-->
-        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="static/css/animate.css">
 
 		<!--flaticon.css-->
-        <link rel="stylesheet" href="assets/css/flaticon.css">
+        <link rel="stylesheet" href="static/css/flaticon.css">
 
 		<!--slick.css-->
-        <link rel="stylesheet" href="assets/css/slick.css">
-		<link rel="stylesheet" href="assets/css/slick-theme.css">
+        <link rel="stylesheet" href="static/css/slick.css">
+		<link rel="stylesheet" href="static/css/slick-theme.css">
 		
         <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
 		
 		<!-- bootsnav -->
-		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
+		<link rel="stylesheet" href="static/css/bootsnav.css" >	
         
         <!--style.css-->
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="static/css/style.css">
         
         <!--responsive.css-->
-        <link rel="stylesheet" href="assets/css/responsive.css">
+        <link rel="stylesheet" href="static/css/responsive.css">
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -162,7 +162,7 @@
 						<div class=" col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/wicked2.jpg.webp" alt="wicked2 image">
+									<img src="static/images/movies/wicked2.jpg.webp" alt="wicked2 image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">wicked</a></h2>
@@ -181,6 +181,10 @@
 												<p>
 													Misunderstood because of her green skin, a young woman named Elphaba forges an unlikely but profound friendship with Glinda, a student with an unflinching desire for popularity. Following an encounter with the Wizard of Oz, their relationship soon reaches a crossroad as their lives begin to take very different paths.
 												</p>
+											<!-- User Review Button -->
+												<a href="{{ url_for('movie_details', movie_id=movie.id) }}" class="btn btn-secondary">User Reviews</a>
+											<!-- Buy Tickets Button -->
+												<a href="{{ url_for('purchase_ticket', movie_id=movie.id) }}" class="btn btn-primary">Buy Tickets</a>
 											</div>
 										</div>
 									</div>
@@ -191,7 +195,7 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/deadpool3.jpg" alt="Deadpool image">
+									<img src="static/images/movies/Deadpool_3.jpg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Deadpool 3</a></h2>
@@ -220,7 +224,7 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/venomLastDance.avif" alt="Deadpool image">
+									<img src="static/images/movies/venomLastDance.avif" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Venom - The Last Dance</a></h2>
@@ -249,7 +253,7 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/absolution.jpeg" alt="Deadpool image">
+									<img src="static/images/movies/absolution.jpeg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Absolution</a></h2>
@@ -278,7 +282,7 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/overlord.jpg" alt="Deadpool image">
+									<img src="static/images/movies/overlord.jpg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Overlord - The Secret Kingdom</a></h2>
@@ -307,7 +311,7 @@
 						<div class=" col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/blitz.jpeg" alt="Deadpool image">
+									<img src="static/images/movies/blitz.jpeg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Blitz</a></h2>
@@ -350,7 +354,7 @@
 						<div class=" col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/redOne.jpg" alt="Deadpool image">
+									<img src="static/images/movies/redOne.jpg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Red One</a></h2>
@@ -379,7 +383,7 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/smile2.jpg" alt="Deadpool image">
+									<img src="static/images/movies/smile2.jpg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Smile 2</a></h2>
@@ -408,7 +412,7 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/discpicableme4.jpeg" alt="Deadpool image">
+									<img src="static/images/movies/discpicableme4.jpeg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Despicable Me 4</a></h2>
@@ -437,7 +441,7 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/TheHangmanjpg.webp" alt="Deadpool image">
+									<img src="static/images/movies/TheHangmanjpg.webp" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">The Hangman</a></h2>
@@ -466,7 +470,7 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/transformersnew.jpg" alt="Deadpool image">
+									<img src="static/images/movies/transformersnew.jpg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Transformers One</a></h2>
@@ -495,7 +499,7 @@
 						<div class=" col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/twister3.jpg" alt="Deadpool image">
+									<img src="static/images/movies/twister3.jpg" alt="Deadpool image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 									<h2><a href="#">Twisters</a></h2>
