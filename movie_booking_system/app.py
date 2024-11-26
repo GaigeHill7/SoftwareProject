@@ -47,17 +47,19 @@ def home():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        name = request.form['name']
         email = request.form['email']
         password = request.form['password']
+        phone = request.form.get('phone')  # Optional field
+        address = request.form.get('address')  # Optional field
 
-        # Check if username already exists
-        if User.query.filter_by(username=username).first():
-            flash('Username already exists. Please log in.', 'danger')
-            return redirect(url_for('login'))
+        # Check if the email is already registered
+        if User.query.filter_by(email=email).first():
+            flash('Email is already registered.', 'error')
+            return redirect(url_for('register'))
 
-        # Add user to database
-        new_user = User(username=username, email=email, password=password)
+        # Create a new user
+        new_user = User(name=name, email=email, password=password, phone=phone, address=address)
         db.session.add(new_user)
         db.session.commit()
 
@@ -65,16 +67,54 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html')
+# @app.route('/register', methods=['GET', 'POST'])
+# def register():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         email = request.form['email']
+#         password = request.form['password']
+
+#         # Check if username already exists
+#         if User.query.filter_by(username=username).first():
+#             flash('Username already exists. Please log in.', 'danger')
+#             return redirect(url_for('login'))
+
+#         # Add user to database
+#         new_user = User(username=username, email=email, password=password)
+#         db.session.add(new_user)
+#         db.session.commit()
+
+#         flash('Registration successful! Please log in.', 'success')
+#         return redirect(url_for('login'))
+
+#     return render_template('register.html')
 
 # User Login Route
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         email = request.form['email']
+#         password = request.form['password']
+
+#         # Check if the user exists and the password matches
+#         user = User.query.filter_by(email=email).first()
+#         if user and user.password == password:  # Ensure to hash and verify passwords in production
+#             flash('Login successful!', 'success')
+#             # Perform session management (e.g., store user ID in the session)
+#             return redirect(url_for('home'))
+#         else:
+#             flash('Invalid email or password.', 'error')
+
+#     return render_template('login.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
 
         # Check if the user is an admin
-        admin = Admin.query.filter_by(name=username, password=password).first()
+        admin = Admin.query.filter_by(email=email, password=password).first()
         if admin:
             session['user_id'] = admin.id
             session['is_admin'] = True
@@ -82,7 +122,7 @@ def login():
             return redirect(url_for('admin_dashboard'))
 
         # Check if the user is a regular user
-        user = User.query.filter_by(name=username, password=password).first()
+        user = User.query.filter_by(email=email, password=password).first()
         if user:
             session['user_id'] = user.id
             session['is_admin'] = False  # Explicitly set this to False for regular users
