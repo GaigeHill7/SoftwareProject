@@ -71,9 +71,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#UpcomingShowing">Upcoming Movies</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                        </li>
+                        <div class="mt-5 text-center">
+                            <a href="{{ url_for('logout') }}" class="btn btn-danger">Log Out</a>
+                        </div>
                     </ul>
                 </div>
             </nav>
@@ -138,6 +138,8 @@
             </div>
         </div>
     </section>
+
+
     
 
     <!-- Footer -->

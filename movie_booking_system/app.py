@@ -107,6 +107,27 @@ def register():
 
 #     return render_template('login.html')
 
+
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        # Check if the user is an admin
+        admin = Admin.query.filter_by(email=email, password=password).first()
+        if admin:
+            session['user_id'] = admin.id
+            session['is_admin'] = True
+            flash('Admin login successful!', 'success')
+            return redirect(url_for('admin_dashboard'))
+
+        # If neither admin nor user, flash an error message
+        flash('Invalid username or password. Please try again.', 'danger')
+
+    return render_template('admin_login.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
