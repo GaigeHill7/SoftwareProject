@@ -28,9 +28,7 @@ class Movie(db.Model):
     showtime = db.Column(db.String(50), nullable=True)  # e.g., "7:00 PM"
     release_date = db.Column(db.DateTime, nullable=True)
     poster = db.Column(db.String(100), nullable=True)  # Path or filename of the poster image
-
-
-
+    image = db.Column(db.String(255), default='default.jpg')
 
 
 class Ticket(db.Model):
