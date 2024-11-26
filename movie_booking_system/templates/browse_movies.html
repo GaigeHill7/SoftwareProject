@@ -69,7 +69,6 @@
                             <p><strong>Price:</strong> ${{ movie.price }}</p>
                             <a href="{{ url_for('purchase_ticket', movie_id=movie.id) }}" class="btn btn-primary mb-2">Buy</a>
                             <a href="{{ url_for('movie_details', movie_id=movie.id) }}" class="btn btn-info mb-2">Movie Details</a>
-                            <a href="{{ url_for('movie_reviews', movie_id=movie.id) }}" class="btn btn-secondary">User Reviews</a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +91,6 @@
                             <p class="card-text">{{ movie.description }}</p>
                             <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
                             <a href="{{ url_for('movie_details', movie_id=movie.id) }}" class="btn btn-info mb-2">Movie Details</a>
-                            <a href="{{ url_for('movie_reviews', movie_id=movie.id) }}" class="btn btn-secondary">User Reviews</a>
                         </div>
                     </div>
                 </div>
