@@ -237,7 +237,7 @@ def process_purchase():
 def admin_dashboard():
     if 'user_id' not in session or not Admin.query.get(session['user_id']):
         flash("Access denied. Admins only.", "danger")
-        return redirect(url_for('home'))
+        return redirect(url_for('browse_movies'))
     #return render_template('admin_dashboard.html')
     return render_template('admin_dashboard.html', admin=Admin.query.get(session['user_id']))
 
@@ -246,7 +246,7 @@ def admin_dashboard():
 def generate_status_report():
     if 'user_id' not in session or not Admin.query.get(session['user_id']):
         flash("Access denied. Admins only.", "danger")
-        return redirect(url_for('home'))
+        return redirect(url_for('browse_movies'))
     
     now_showing_movies = Movie.query.filter_by(status="Now Showing").all()
     print(f"Now Showing Movies: {now_showing_movies}")  # Debugging line
@@ -269,7 +269,7 @@ def manage_movies():
     # Ensure the user is logged in as an admin
     if 'user_id' not in session or not session.get('is_admin', False):
         flash("Access denied. Admins only.", "danger")
-        return redirect(url_for('home'))
+        return redirect(url_for('browse_movies'))
     
     movies = Movie.query.all()
 
@@ -299,7 +299,7 @@ def delete_movie(movie_id):
     # Ensure the user is logged in as an admin
     if 'user_id' not in session or not session.get('is_admin', False):
         flash("Access denied. Admins only.", "danger")
-        return redirect(url_for('home'))
+        return redirect(url_for('browse_movies'))
 
     movie = Movie.query.get(movie_id)
     if movie:
@@ -314,7 +314,7 @@ def delete_movie(movie_id):
 def status_report():
     if 'user_id' not in session or not session.get('is_admin', False):
         flash("Access denied. Admins only.", "danger")
-        return redirect(url_for('home'))
+        return redirect(url_for('browse_movies'))
 
     # Retrieve the status data
     total_tickets_sold = Ticket.query.count()
