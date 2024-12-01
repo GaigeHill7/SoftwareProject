@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta Data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Family -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+
+    <!-- Title -->
+    <title>Purchase Ticket - Raider Tickets</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .purchase-ticket-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .purchase-ticket-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .movie-poster {
+            width: 100%; /* Take the full width of the container */
+            height: auto; /* Adjust height automatically to maintain aspect ratio */
+            max-height: 300px; /* Limit the height to ensure it fits within the layout */
+            object-fit: contain; /* Ensure the entire image is visible within the bounds */
+            border-radius: 5px; /* Optional: Add rounded corners for aesthetics */
+            margin-bottom: 20px; /* Add some space below the poster */
+        }
+
+
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .summary {
+            background: #f1f1f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .summary h3 {
+            margin-top: 0;
+            font-weight: 600;
+        }
+
+        .summary p {
+            margin: 5px 0;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #343a40;
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Purchase Ticket</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="purchase-ticket-container">
+        <form action="/process_purchase" method="POST">
+            <input type="hidden" name="movie_id" value="{{ movie.id }}">
+
+            <!-- Movie Title -->
+            <h2>{{ movie.title }}</h2>
+
+            <!-- Movie Poster -->
+            <img src="{{ url_for('static', filename='images/movies/' + movie.title.replace(' ', '_') + '.jpg') }}" alt="{{ movie.title }}" class="movie-poster">
+
+            <!-- Screen Time Selection -->
+            <div class="form-group">
+                <label for="screen_time">Select Screen Time:</label>
+                <select id="screen_time" name="screen_time" required>
+                    <option value="" disabled selected>Select a time</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="3:00 PM">3:00 PM</option>
+                    <option value="6:00 PM">6:00 PM</option>
+                    <option value="9:00 PM">9:00 PM</option>
+                </select>
+            </div>
+
+            <!-- Number of Tickets -->
+            <div class="form-group">
+                <label for="num_tickets">Number of Tickets:</label>
+                <input type="number" id="num_tickets" name="num_tickets" min="1" max="10" value="1" required>
+            </div>
+
+            <!-- Theater Selection -->
+            <div class="form-group">
+                <label for="theater">Select Theater:</label>
+                <select id="theater" name="theater" required>
+                    <option value="" disabled selected>Select a theater</option>
+                    <option value="Lubbock">Lubbock</option>
+                    <option value="Amarillo">Amarillo</option>
+                    <option value="Levelland">Levelland</option>
+                    <option value="Plainview">Plainview</option>
+                    <option value="Synder">Synder</option>
+                    <option value="Abilene">Abilene</option>
+                </select>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="form-group">
+                <label for="payment_method">Preferred Payment Method:</label>
+                <select id="payment_method" name="payment_method" required>
+                    <option value="" disabled selected>Select a payment method</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="PayPal">PayPal</option>
+                </select>
+            </div>
+            <!-- Card Information (Hidden by Default) -->
+            <div id="card-info" style="display: none;">
+                <div class="form-group">
+                    <label for="card_name">Name on Card:</label>
+                    <input type="text" id="card_name" name="card_name" placeholder="Enter name on card">
+                </div>
+                <div class="form-group">
+                    <label for="card_number">Card Number:</label>
+                    <input type="text" id="card_number" name="card_number" placeholder="Enter card number">
+                </div>
+                <div class="form-group">
+                    <label for="expiry_date">Expiry Date:</label>
+                    <input type="month" id="expiry_date" name="expiry_date">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="Enter CVV" maxlength="3">
+                </div>
+            </div>
+
+            <!-- Summary of Order -->
+            <div class="summary">
+                <h3>Order Summary</h3>
+                <p><strong>Number of Tickets:</strong> <span id="summary_tickets">1</span></p>
+                <p><strong>Total Cost:</strong> $<span id="summary_cost">{{ movie.price }}</span></p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Purchase Tickets</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Raider Tickets. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const ticketInput = document.getElementById('num_tickets');
+        const summaryTickets = document.getElementById('summary_tickets');
+        const summaryCost = document.getElementById('summary_cost');
+        const ticketPrice = {{ movie.price }}; // Ensure `movie.price` is passed from the backend as a valid JavaScript number.
+    
+        // Update Summary on Ticket Input Change
+        ticketInput.addEventListener('input', () => {
+            const numTickets = ticketInput.value;
+            summaryTickets.textContent = numTickets;
+            summaryCost.textContent = (numTickets * ticketPrice).toFixed(2);
+        });
+    
+        // Handle Payment Method Selection
+        const paymentMethodSelect = document.getElementById('payment_method');
+        const cardInfoDiv = document.getElementById('card-info');
+    
+        paymentMethodSelect.addEventListener('change', () => {
+            const selectedMethod = paymentMethodSelect.value;
+    
+            // Show card fields if "Debit Card" or "Credit Card" is selected
+            if (selectedMethod === 'Debit Card' || selectedMethod === 'Credit Card') {
+                cardInfoDiv.style.display = 'block';
+            } else {
+                cardInfoDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

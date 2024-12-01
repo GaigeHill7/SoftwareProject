@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Family -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Title -->
+    <title>Raider Tickets</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/icon" href="{{ url_for('static', filename='images/favicon.png') }}"/>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header-top" class="header-top">
+        <ul>
+            <li>
+                <div class="header-top-left">
+                    <ul>
+                        <li class="select-opt">
+                            <select name="language" id="language">
+                                <option value="default">EN</option>
+                                <option value="Bangla">BN</option>
+                                <option value="Arabic">AB</option>
+                            </select>
+                        </li>
+                        <li class="select-opt">
+                            <select name="currency" id="currency">
+                                <option value="usd">USD</option>
+                                <option value="euro">Euro</option>
+                                <option value="bdt">BDT</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Welcome Section -->
+    <section id="home" class="welcome-hero">
+        <div class="container">
+            <div class="welcome-hero-txt">
+                <h2>RAIDER TICKETS <br> EVERYTHING AND ALL YOU NEED </h2>
+                <p>
+                    Find the best movies, anytime, anywhere and skip the lines! 
+                </p>
+            </div>
+            <!-- Admin Dashboard Button -->
+            {% if session.get('is_admin') %}
+            <div class="text-center mt-4">
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-warning btn-lg">Admin Dashboard</a>
+            </div>
+            {% endif %}
+            <!-- Register Button -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-menu">
+                <ul class="footer-menu-item">
+                    <li><a href="#works">How It Works</a></li>
+                    <li><a href="#explore">Explore</a></li>
+                </ul>
+            </div>
+            <div class="hm-footer-copyright">
+                <p>&copy; 2024 Raider Tickets. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+</body>
+
+</html>
