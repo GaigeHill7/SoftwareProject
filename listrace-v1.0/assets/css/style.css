@@ -247,7 +247,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     background-position:center;
     background-size:cover;
     text-align: center;
-    height:800px;
+    height:975px;
     z-index: 1;
 }
 .welcome-hero:before{
@@ -332,6 +332,8 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     -ms-transition: 0.3s linear; 
     -o-transition: 0.3s linear; 
     transition: 0.3s linear;
+    position: relative;
+    z-index: 10;
 }
 .welcome-hero-btn:hover{/*background: #fd4043;*/background: #f43032;}
 
@@ -340,6 +342,224 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     height:  auto;
     margin-left:  12px;
 }
+
+.AdminLogin {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.AdminLogin h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.AdminLogin .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.AdminLogin label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.AdminLogin input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.AdminLogin button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.AdminLogin button:hover {
+    background: #0056b3;
+}
+
+#error-message {
+    margin-top: 10px;
+}
+/*user-login-section
+UserLogin
+/* User Login Specific Styles */
+.UserLogin {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.UserLogin h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.UserLogin .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.UserLogin label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.UserLogin input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.UserLogin button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.UserLogin button:hover {
+    background: #0056b3;
+}
+
+/* User Sign UP Specific Styles */
+.SignUp {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.SignUp h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.SignUp .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.SignUp label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.SignUp input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.SignUp button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.SignUp button:hover {
+    background: #0056b3;
+}
+
+/*Buy CSS*/
+/* User Sign UP Specific Styles */
+.BuyPage {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.BuyPage h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.BuyPage .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.SignUp label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.BuyPage input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.BuyPage button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.BuyPage button:hover {
+    background: #0056b3;
+}
+
+#error-message {
+    margin-top: 10px;
+}
+
 
 /*-------------------------------------
         5. List-topuics
@@ -392,7 +612,9 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 
 .single-how-works{
     text-align: center;
-    padding:50px 42px;
+    width: 500px; /* Set a fixed width */
+    height: 350px; /* Set a fixed height */
+    padding:50px 50px;
     border-radius: 3px;
     box-shadow: 0 0px 5px rgba(71,71,71,.2);
     margin-bottom: 30px;
@@ -416,8 +638,10 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     font-size:  18px;
     margin: 35px 0 20px;
 }
-.single-how-works h2 a span {text-transform:  lowercase;}
-.single-how-works p {margin-bottom: 25px;text-transform: initial;}
+.single-how-works h2 a span {text-transform:  capitalize;}
+.single-how-works p {
+    position: relative;
+    margin-bottom: 25px;text-transform: initial;}
 
 .single-how-works-icon [class^="flaticon-"]:before,.single-how-works-icon [class*=" flaticon-"]:before,.single-how-works-icon [class^="flaticon-"]:after,.single-how-works-icon [class*=" flaticon-"]:after {font-size: 35px;}
 .single-how-works:hover .single-how-works-icon [class^="flaticon-"]:before,.single-how-works:hover .single-how-works-icon [class*=" flaticon-"]:before,.single-how-works:hover .single-how-works-icon [class^="flaticon-"]:after,.single-how-works:hover .single-how-works-icon [class*=" flaticon-"]:after {color:#ff545a;}
@@ -443,27 +667,37 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
         7. Explore
 --------------------------------------*/
 .explore{
-    padding:117px 0 95px;
+    padding:110px 0 100px;
     background: #f8fafb;
 }
 .explore-content{margin-top: 78px;}
 
 .single-explore-item {
-    height:800px;
+    height:900px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     background: #fff;
     border: 1px solid #edeff1;
     border-radius: 3px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     -webkit-transition: .3s linear; 
     -moz-transition:.3s linear; 
     -ms-transition:.3s linear; 
     -o-transition:.3s linear;
     transition: .3s linear;
 }
-.single-explore-img{position:relative;overflow: hidden;}
+.single-explore-img{
+    width: 100%;
+    height: -100px; /* Adjust height based on your design */
+    object-fit: cover; /* Ensures the image fills the container without being stretched */}
+
+.single-explore-img img{
+    width: 600px; /* Ensures the width adjusts automatically */
+    height: 600px; /* Sets uniform height */
+    object-fit: cover; /* Crops the image to fit the specified height */
+    }
+    
 .single-explore-img:before {
     position: absolute;
     content: "";
@@ -524,7 +758,10 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 .single-explore-image-icon-box ul li:hover i{color: #267dff;}
 
 .single-explore-txt {
-    padding: 26px 25px 24px 15px;
+    padding: 25px 25px 25px 25px;
+    height: 300px; /* Set a fixed height for the text container */
+    overflow: hidden; /* Hide the text that exceeds the height */
+    
 }
 .single-explore-txt.bg-theme-1 .explore-rating{background: #70a9ff;}
 .single-explore-txt.bg-theme-2 .explore-rating{background: #00c61c;}
@@ -919,9 +1156,14 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 }
 .footer-menu ul.footer-menu-item li a:hover{color: #f43032;}
 .hm-footer-copyright {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     padding: 40px 0;
     border-top: 1px solid #e1e5eb;
 }
+
 .hm-footer-copyright p,.hm-footer-copyright p a {
     color: #a5adb3;
     font-size: 14px;
@@ -1002,5 +1244,19 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 @keyframes example {
     0%   {bottom:0px;}
     100%  {bottom:7px;}
+}
+
+.scrollable-description {
+    height: 200px; /* Set a fixed height for the description box */
+    overflow-y: auto; /* Allow vertical scrolling when content exceeds the height */
+    padding-right: 10px; /* Optional: add some space to the right to avoid the scrollbar overlaying the text */
+    margin-bottom: 30px; /* Optional: add space below the description box */
+}
+
+/* Style the paragraph within the scrollable description box */
+.scrollable-description p {
+    margin: 10;
+    font-size: 14px;
+    line-height: 1.;
 }
 /*========================Thank you=================
