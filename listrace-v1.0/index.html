@@ -14,8 +14,8 @@
         <!-- title of site -->
         <title>Raider Tickets</title>
 
-        <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+        <!-- For TTU png -->
+		<link rel="shortcut icon" type="image/icon" href="assets/logo/TTU.png"/>
        
         <!--font-awesome.min.css-->
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -59,35 +59,6 @@
 		<!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
-		
-		<!--header-top start -->
-		<header id="header-top" class="header-top">
-			<ul>
-				<li>
-					<div class="header-top-left">
-						<ul>
-							<li class="select-opt">
-								<select name="language" id="language">
-									<option value="default">EN</option>
-									<option value="Bangla">BN</option>
-									<option value="Arabic">AB</option>
-								</select>
-							</li>
-							<li class="select-opt">
-								<select name="currency" id="currency">
-									<option value="usd">USD</option>
-									<option value="euro">Euro</option>
-									<option value="bdt">BDT</option>
-								</select>
-							</li>
-						</ul>
-					</div>
-				</li>
-				
-			</ul>
-					
-		</header><!--/.header-top-->
-		<!--header-top end -->
 
 		<!-- top-area Start -->
 		<section class="top-area">
@@ -150,26 +121,43 @@
 				</div><!--/.section-header-->
 				<div class="works-content">
 					<div class="row">
-						<div class="col-md-4 col-sm-6">
+						<div class="col-md col-sm-6">
 							<div class="single-how-works">
 								<div class="single-how-works-icon">
 									<i class="flaticon-networking"></i>
 								</div>
-								<h2><a href="#"><span> View movies and buy tickets...</span></a></h2>
+								<h2><a href="#"><span> View movies and Buy tickets</span></a></h2>
 								<p>
 									Our website finds the movies you want and allows you to buy tickets which can be presented at the theaters 
 								</p>
+								<button class="welcome-hero-btn how-work-btn" id="browse-movie-btn">
+									Click here
+								</button>
+							</div>
+						</div>
+						<div class="col-md col-sm-6">
+							<div class="single-how-works">
+								<div class="single-how-works-icon">
+									<i class="flaticon-networking"></i>
+								</div>
+								<h2><a href="#"><span> View purchase history</span></a></h2>
+								<p>
+									Take a look at your previous experiences at the theaters
+								</p>
 								<button class="welcome-hero-btn how-work-btn" onclick="window.location.href='BrowseMovie.html'">
-									Click Here
+									Click here
 								</button>
 							</div>
 						</div>
 					</div>
 				</div>
+				
 			</div><!--/.container-->
+			
 		
 		</section><!--/.works-->
 		<!--works end -->
+		
 
 		<!--explore start -->
 		<section id="explore" class="explore">
@@ -183,25 +171,28 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/twister3.jpg" alt="Deadpool image">
+									<img src="assets/images/explore/Gladiator.jpg" alt="Gladiator image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
-									<h2><a href="#">Twisters</a></h2>
+									<h2><a href="#">Gladiator II</a></h2>
 									<p class="explore-rating-price">
-										<span class="explore-rating">4.3</span>
-										<span> 125249 ratings</span> 
+										<span class="explore-rating">6.9</span>
+										<span> 78k ratings</span> 
 										<span class="explore-price-box">
-											form
-											<span class="explore-price">$14.50</span>
+											Price:
+											<span class="explore-price">$9.50</span>
 										</span>
-										 <a href="#">Theater</a>
+										<a href="BuyPage.html" style="position: relative;">Buy</a>
 									</p>
 									<div class="explore-person">
 										<div class="row">
 											<div class="col-sm-10">
-												<p>
-													Haunted by a devastating encounter with a tornado, Kate Cooper gets lured back to the open plains by her friend, Javi, to test a groundbreaking new tracking system. She soon crosses paths with Tyler Owens, a charming but reckless social-media superstar who thrives on posting his storm-chasing adventures. As storm season intensifies, Kate, Tyler and their competing teams find themselves in a fight for their lives as multiple systems converge over central Oklahoma.
-												</p>
+												<!-- Scrollable description block -->
+												<div class="scrollable-description">
+													<p>
+														After his home is conquered by the tyrannical emperors who now lead Rome, Lucius is forced to enter the Colosseum and must look to his past to find strength to return the glory of Rome to its people.
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -212,25 +203,28 @@
 						<div class="col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/transformersnew.jpg" alt="Deadpool image">
+									<img src="assets/images/explore/Moana2.jpg" alt="Moana 2 image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
-									<h2><a href="#">Transformers One</a></h2>
+									<h2><a href="#">Moana 2</a></h2>
 									<p class="explore-rating-price">
-										<span class="explore-rating">4.3</span>
-										<span>31983 ratings</span> 
+										<span class="explore-rating">7.1</span>
+										<span> 8.3k ratings</span> 
 										<span class="explore-price-box">
-											form
-											<span class="explore-price">$15.40</span>
+											Price:
+											<span class="explore-price">$9.50</span>
 										</span>
-										 <a href="#">Theater</a>
+										<a href="BuyPage.html" style="position: relative;">Buy</a>
 									</p>
 									<div class="explore-person">
 										<div class="row">
 											<div class="col-sm-10">
-												<p>
-													Optimus Prime and Megatron, as former friends, bonded like brothers. Their relationship ultimately changes Cybertron's fate forever.
-												</p>
+												<!-- Scrollable description block -->
+												<div class="scrollable-description">
+													<p>
+														After receiving an unexpected call from her wayfinding ancestors, Moana must journey to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced.
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -241,25 +235,28 @@
 						<div class=" col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="assets/images/explore/TheHangmanjpg.webp" alt="Deadpool image">
+									<img src="assets/images/explore/Wicked.jpg" alt="Wicked image">
 								</div>
 								<div class="single-explore-txt bg-theme-1">
-									<h2><a href="#">The Hangman</a></h2>
+									<h2><a href="#">Wicked</a></h2>
 									<p class="explore-rating-price">
-										<span class="explore-rating">4.3</span>
-										<span> 860 ratings</span> 
+										<span class="explore-rating">8.2</span>
+										<span> 33k ratings</span> 
 										<span class="explore-price-box">
-											form
-											<span class="explore-price">$17.50</span>
+											Price: 
+											<span class="explore-price">$9.50</span>
 										</span>
-										 <a href="#">Theater</a>
+										<a href="BuyPage.html" style="position: relative;">Buy</a>
 									</p>
 									<div class="explore-person">
 										<div class="row">
 											<div class="col-sm-10">
-												<p>
-													A local cult has summoned an evil demon born of hate and pain, known to them as The Hangman, and now the bodies have begun to pile up. Leon wakes up in the morning to discover that his son is missing. To find him, Leon must face the murderous cult and the bloodthirsty monster that is The Hangman.
-												</p>
+												<!-- Scrollable description block -->
+												<div class="scrollable-description">
+													<p>
+														Elphaba, a misunderstood young woman because of her green skin, and Glinda, a popular girl, become friends at Shiz University in the Land of Oz. After an encounter with the Wonderful Wizard of Oz, their friendship reaches a crossroads.
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -536,16 +533,12 @@
 				<div class="footer-menu">
 		           	<div class="row">
 			           	<div class="col-sm-3">
-			           		 <div class="navbar-header">
-				                <a class="navbar-brand" href="index.html">list<span>race</span></a>
-				            </div><!--/.navbar-header-->
 			           	</div>
 			           	<div class="col-sm-9">
 			           		<ul class="footer-menu-item">
 			                    <li class="scroll"><a href="#works">how it works</a></li>
 			                    <li class="scroll"><a href="#explore">explore</a></li>
-			                    <li class="scroll"><a href="#reviews">review</a></li>
-			                    <li class="scroll"><a href="#blog">blog</a></li>
+			                    <li class="scroll"><a href="#reviews">reviews</a></li>
 			                    <li class="scroll"><a href="#contact">contact</a></li>
 			                    <li class=" scroll"><a href="#contact">my account</a></li>
 			                </ul><!--/.nav -->
