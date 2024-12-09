@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- meta data -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    
+        <!--font-family-->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        
+        <!-- title of site -->
+        <title>Raider Tickets</title>
+    
+        <!-- For favicon png -->
+        <link rel="shortcut icon" type="image/icon" href="static/logo/favicon.png"/>
+       
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="static/css/font-awesome.min.css">
+    
+        <!--linear icon css-->
+        <link rel="stylesheet" href="static/css/linearicons.css">
+    
+        <!--animate.css-->
+        <link rel="stylesheet" href="static/css/animate.css">
+    
+        <!--flaticon.css-->
+        <link rel="stylesheet" href="static/css/flaticon.css">
+    
+        <!--slick.css-->
+        <link rel="stylesheet" href="static/css/slick.css">
+        <link rel="stylesheet" href="static/css/slick-theme.css">
+        
+        <!--bootstrap.min.css-->
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        
+        <!-- bootsnav -->
+        <link rel="stylesheet" href="static/css/bootsnav.css" >	
+        
+        <!--style.css-->
+        <link rel="stylesheet" href="static/css/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="static/css/responsive.css">
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    
+    </head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('browse_movies') }}">Browse Movies</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Search Results</h1>
+        {% if results %}
+            {% for movie in results %}
+                <div class="movie-card">
+                    <!-- Movie Poster -->
+                    <img src="{{ url_for('static', filename='images/movies/' + movie.title.replace(' ', '_') + '.jpg') }}" alt="{{ movie.title }}" class="movie-poster">
+                    
+                    <!-- Movie Title -->
+                    <h2>{{ movie.title }}</h2>
+                    
+                    <!-- Synopsis -->
+                    <p><strong>Synopsis:</strong> {{ movie.synopsis }}</p>
+                    
+                    <!-- Cast -->
+                    <p><strong>Cast:</strong> {{ movie.cast }}</p>
+                    
+                    <!-- Runtime -->
+                    <p><strong>Runtime:</strong> {{ movie.runtime }} minutes</p>
+                    
+                    <!-- Price -->
+                    <p><strong>Price:</strong> ${{ movie.price }}</p>
+                    
+                    <!-- Buttons -->
+                    <div class="movie-actions">
+                        <button onclick="location.href='{{ url_for('movie_details', movie_id=movie.id) }}';" class="btn btn-info">Movie Details</button>
+                        <button onclick="location.href='{{ url_for('purchase_ticket', movie_id=movie.id) }}';" class="btn btn-primary">Buy Ticket</button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No movies found for your search query.</p>
+        {% endif %}
+    </main>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
+        }
+        .movie-card {
+            background: #fff;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 400px;
+            text-align: center;
+        }
+        .movie-poster {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        .movie-actions {
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+        }
+        .btn-info:hover {
+            background-color: #138496;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</body>
+</html>

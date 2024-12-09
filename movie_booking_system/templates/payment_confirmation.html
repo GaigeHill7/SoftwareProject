@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta and Title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header .page-title {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .confirmation-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .confirmation-message h2 {
+            color: #28a745;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-message p {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .ticket-details {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .ticket-details h3 {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #343a40;
+        }
+
+        .ticket-details p {
+            margin: 5px 0;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .barcode-section h3 {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+            color: #343a40;
+        }
+
+        .barcode {
+            background-color: #f1f1f1;
+            border: 1px dashed #ced4da;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin: 10px auto;
+            width: fit-content;
+            color: #495057;
+        }
+
+        .print-btn,
+        .back-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px 15px;
+            border: none;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .print-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .print-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .back-btn {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .back-btn:hover {
+            background-color: #495057;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1 class="page-title">Payment Confirmation</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="confirmation-container">
+        <!-- Confirmation Message -->
+        <div class="confirmation-message">
+            <h2>Payment Confirmed!</h2>
+            <p>Thank you for your purchase. Below is your ticket information.</p>
+        </div>
+
+        <!-- Ticket Details -->
+        <div class="ticket-details">
+            <h3>Ticket Information</h3>
+            <p><strong>Movie:</strong> {{ movie.title }}</p>
+            <p><strong>Screen Time:</strong> {{ screen_time }}</p>
+            <p><strong>Theater:</strong> {{ theater }}</p>
+            <p><strong>Number of Tickets:</strong> {{ num_tickets }}</p>
+            <p><strong>Total Cost:</strong> ${{ total_cost }}</p>
+        </div>
+
+        <!-- Barcode -->
+        <div class="barcode-section">
+            <h3>Your Barcode</h3>
+            <div class="barcode">
+                {{ barcode }}
+            </div>
+        </div>
+
+        <!-- Print Ticket Button -->
+        <button onclick="window.print()" class="print-btn">Print Ticket</button>
+        <a href="{{ url_for('browse_movies') }}" class="back-btn">Return to Home</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Raider Tickets. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

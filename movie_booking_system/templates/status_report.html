@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>Status Report</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Now Showing Movies</h2>
+            <ul>
+                {% for movie in now_showing_movies %}
+                    <li>{{ movie.title }}</li>
+                {% else %}
+                    <li>No movies are currently showing.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Upcoming Movies</h2>
+            <ul>
+                {% for movie in upcoming_movies %}
+                    <li>{{ movie.title }}</li>
+                {% else %}
+                    <li>No upcoming movies available.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ticket Statistics</h2>
+            <p>Total Tickets Sold: {{ total_tickets }}</p>
+            <p>Total Revenue: ${{ total_revenue }}</p>
+        </section>
+    </main>
+
+    <footer>
+        <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+    </footer>
+</body>
+
+</html>
